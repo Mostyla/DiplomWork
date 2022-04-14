@@ -42,7 +42,7 @@ class SelectCityDialog(private val mContext: Context, private val onCitySelectLi
                 onCitySelectListener.onCitySelected(cityModel)
                 dismiss()
             }
-        })
+        }, context)
         binding.rvCity.adapter = adapter
     }
 
@@ -58,7 +58,7 @@ class SelectCityDialog(private val mContext: Context, private val onCitySelectLi
 
     private fun filterCountry(text: String) {
         val filteredList: ArrayList<CityModel> = ArrayList()
-        for (item in CityHelper.populateCity()) {
+        for (item in CityHelper.populateCity(context)) {
             if (item.name.toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item)
             }

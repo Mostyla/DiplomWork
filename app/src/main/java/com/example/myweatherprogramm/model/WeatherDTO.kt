@@ -1,6 +1,7 @@
 package com.example.myweatherprogramm.model
 import com.google.gson.annotations.SerializedName
 
+// замапить
 data class WeatherDTO(
     @SerializedName("current")
     val current: Current,

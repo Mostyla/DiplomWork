@@ -1,17 +1,19 @@
 package com.example.myweatherprogramm.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.contentValuesOf
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myweatherprogramm.ui.dialog.SelectCityDialog
 import com.example.myweatherprogramm.data.CityHelper
 import com.example.myweatherprogramm.model.CityModel
 import com.example.myweatherprogramm.databinding.ItemCityBinding
 
-class CityAdapter(private val onCitySelectListener: SelectCityDialog.OnCitySelectListener) :
+class CityAdapter(private val onCitySelectListener: SelectCityDialog.OnCitySelectListener, context: Context) :
     RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
 
-    private var cities = CityHelper.populateCity()
+    private var cities = CityHelper.populateCity(context)
 
     inner class CityViewHolder(itemView: ItemCityBinding) : RecyclerView.ViewHolder(itemView.root) {
         private val tv_city = itemView.tvCity

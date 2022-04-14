@@ -10,28 +10,27 @@ import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myweatherprogramm.ui.dialog.SelectCityDialog
-import com.example.myweatherprogramm.ui.adapter.WeatherRcViewAdapter
-import com.example.myweatherprogramm.model.WeatherViewModel
+import com.example.myweatherprogramm.R
+import com.example.myweatherprogramm.databinding.ActivityMainBinding
 import com.example.myweatherprogramm.model.CityModel
 import com.example.myweatherprogramm.model.WeatherDTO
-import com.example.myweatherprogramm.databinding.ActivityMainBinding
+import com.example.myweatherprogramm.model.WeatherViewModel
+import com.example.myweatherprogramm.ui.adapter.WeatherRcViewAdapter
+import com.example.myweatherprogramm.ui.dialog.SelectCityDialog
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    val scope = CoroutineScope(Dispatchers.IO)
-    private lateinit var viewModel: WeatherViewModel
+    private val viewModel by viewModel<WeatherViewModel>()
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     val locationPermissionRequest = registerForActivityResult(
@@ -41,6 +40,7 @@ class MainActivity : BaseActivity() {
             permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
         ) {
             getLastLocation()
+            binding.progressBar!!.visibility = View.VISIBLE
         } else {
             initActions()
         }
@@ -50,10 +50,9 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         initDroidListener()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
-        viewModel = ViewModelProvider(this).get(WeatherViewModel::class.java)
         viewModel.getResponse().observe(this) {
             runOnUiThread {
                 bindData(it)
@@ -61,7 +60,6 @@ class MainActivity : BaseActivity() {
         }
 
         initActions()
-
         getLastLocation()
     }
 
@@ -82,15 +80,16 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initActions() {
+        binding.tvWindSpeed.visibility = View.GONE
+        binding.tvCurrentDate.visibility = View.GONE
+        binding.tvHumidity.visibility = View.GONE
         binding.btnSelectCity.setOnClickListener {
             SelectCityDialog(this, object : SelectCityDialog.OnCitySelectListener {
                 override fun onCitySelected(cityModel: CityModel) {
                     binding.tvWindSpeed.visibility = View.VISIBLE
                     binding.tvCurrentDate.visibility = View.VISIBLE
                     binding.tvHumidity.visibility = View.VISIBLE
-                    scope.launch {
-                        viewModel.load(cityModel.longitude, cityModel.latitude)
-                    }
+                    viewModel.load(cityModel.longitude, cityModel.latitude)
                 }
             }).show()
         }
@@ -105,12 +104,10 @@ class MainActivity : BaseActivity() {
                 fusedLocationClient.lastLocation
                     .addOnSuccessListener { location: Location? ->
                         Log.i("ttt", "loc=${location?.latitude},lon=${location?.longitude}")
-                        scope.launch {
-                            viewModel.load(
-                                location!!.longitude.toFloat(),
-                                location.latitude.toFloat()
-                            )
-                        }
+                        viewModel.load(
+                            location!!.longitude.toFloat(),
+                            location.latitude.toFloat()
+                        )
                     }
             } else {
                 locationPermissions()
@@ -146,13 +143,13 @@ class MainActivity : BaseActivity() {
         binding.tvHumidity.visibility = View.VISIBLE
         binding.tvCurrentDate.visibility = View.VISIBLE
         binding.tvWindSpeed.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.GONE
 
         val cityName = weatherDTO.timezone
         val weatherDescription = weatherDTO.current.weather[0].description
         val temperature = weatherDTO.current.feelsLike.toInt()
         val windSpeed = weatherDTO.current.windSpeed.toString()
         val humidity = weatherDTO.current.humidity.toString()
-        val iconId = weatherDTO.current.weather[0].icon
         val currentDate = convertLongToTime(weatherDTO.current.dt.toLong() * 1000)
 
         binding.tvCityName.text = cityName
@@ -162,16 +159,34 @@ class MainActivity : BaseActivity() {
         binding.tvHumidity.text = "$humidity %"
         binding.tvCurrentDate.text = currentDate.toString()
 
-        Glide.with(this).load("http://openweathermap.org/img/wn/$iconId@2x.png")
-            .into(binding.ivWeather)
+
+        initWeatherInons(weatherDTO)
+
+//        Glide.with(this).load("http://openweathermap.org/img/wn/$iconId@2x.png")
+//            .into(binding.ivWeather)
 
         binding.rcViewWeather.layoutManager =
             LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         binding.rcViewWeather.adapter = WeatherRcViewAdapter(weatherDTO.daily)
     }
 
+    private fun initWeatherInons(weatherDTO: WeatherDTO) {
+
+        when (weatherDTO.current.weather[0].main){
+            "Clear" -> binding.ivWeather.setImageResource(R.drawable.ic_clear_day)
+            "Clouds" -> binding.ivWeather.setImageResource(R.drawable.ic_cloudy_weather)
+            "Mist" -> binding.ivWeather.setImageResource(R.drawable.ic_mist)
+            "Snow" -> binding.ivWeather.setImageResource(R.drawable.ic_snow_weather)
+            "Rain" -> binding.ivWeather.setImageResource(R.drawable.ic_rainy_weather)
+            "Thunderstorm" -> binding.ivWeather.setImageResource(R.drawable.ic_storm_weather)
+            "Drizzle" -> binding.ivWeather.setImageResource(R.drawable.ic_shower_rain)
+        }
+
+    }
+
+
     @SuppressLint("SimpleDateFormat")
-    fun convertLongToTime(time: Long): String {
+    private fun convertLongToTime(time: Long): String {
         val date = Date(time)
         val format = java.text.SimpleDateFormat("dd.MM.yyyy")
         return format.format(date)

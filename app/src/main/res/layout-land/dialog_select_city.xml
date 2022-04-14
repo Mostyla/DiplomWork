@@ -26,7 +26,7 @@
         android:background="@drawable/edit_text_style"
         android:ems="10"
         android:gravity="center"
-        android:hint="Enter the capital name"
+        android:hint="@string/enter_the_capital_name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

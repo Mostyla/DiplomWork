@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -52,7 +53,10 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
 
+    implementation "androidx.activity:activity-ktx:1.4.0"
     implementation 'com.github.bumptech.glide:glide:4.13.0'
+    implementation "io.insert-koin:koin-core:3.2.0-beta-1"
+    implementation "io.insert-koin:koin-android:3.2.0-beta-1"
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
     /* DOCUMENTATION: https://github.com/JobGetabu/DroidNet */

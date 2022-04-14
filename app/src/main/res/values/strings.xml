@@ -1,4 +1,67 @@
 <resources>
     <string name="app_name">WeatherApp</string>
 
+    <!-- data apps-->
+    <string name="search_capital">Search capital</string>
+    <string name="whoops">Whoops!</string>
+    <string name="no_data_found_try_again_later">No Data found! Try again later!</string>
+    <string name="retry">retry</string>
+    <string name="enter_the_capital_name">Enter the capital name</string>
+
+    <!--city names-->
+    <string name="minsk">Minsk</string>
+    <string name="moscow">Moscow</string>
+    <string name="berlin">Berlin</string>
+    <string name="paris">Paris</string>
+    <string name="warszaw">Warszaw</string>
+    <string name="tirane">Tirane</string>
+    <string name="kiev">Kiev</string>
+    <string name="brussel">Brussel</string>
+    <string name="london">London</string>
+    <string name="dublin">Dublin</string>
+    <string name="vaduz">Vaduz</string>
+    <string name="luxemburg">Luxembourg</string>
+    <string name="monaco">Monaco</string>
+    <string name="amsterdam">Amsterdam</string>
+    <string name="zuric">Zuric</string>
+    <string name="sofi">Sofi</string>
+    <string name="budapest">Budapest</string>
+    <string name="chisinau">Chisinau</string>
+    <string name="bucharest">Bucharest</string>
+    <string name="bratislava">Bratislava</string>
+    <string name="prague">Prague</string>
+    <string name="copenhagen">Copenhagen</string>
+    <string name="reykjavi">Reykjavi</string>
+    <string name="oslo">Oslo</string>
+    <string name="riga">Riga</string>
+    <string name="vilnius">Vilnius</string>
+    <string name="helsinki">Helsinki</string>
+    <string name="stockholm">Stockholm</string>
+    <string name="tallinn">Tallinn</string>
+    <string name="andorra">Andorra</string>
+    <string name="sarajevo">Sarajevo</string>
+    <string name="athens">Athens</string>
+    <string name="madrid">Madrid</string>
+    <string name="rome">Rome</string>
+    <string name="malta">Malta</string>
+    <string name="lisbon">Lisbon</string>
+    <string name="skopje">Skopje</string>
+    <string name="belgrade">Belgrade</string>
+    <string name="ljublja">Ljublja</string>
+    <string name="zagreb">Zagreb</string>
+    <string name="podgorica">Podgorica</string>
+
+    <!--weather descriptions-->
+    <string name="broken_clouds">broken clouds</string>
+    <string name="clear_sky">clear sky</string>
+    <string name="few_clouds">few clouds</string>
+    <string name="scattered_clouds">scattered clouds</string>
+    <string name="shower_rain">shower rain</string>
+    <string name="rain">rain</string>
+    <string name="thunderstorm">thunderstorm</string>
+    <string name="snow">snow</string>
+    <string name="mist">mist</string>
+    <string name="overcast_clouds">overcast clouds</string>
+
+
 </resources>

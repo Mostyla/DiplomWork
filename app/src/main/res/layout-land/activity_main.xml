@@ -17,7 +17,7 @@
         android:layout_marginEnd="5dp"
         android:background="@drawable/button_style"
         android:fontFamily="@font/alata"
-        android:text="Search capital"
+        android:text="@string/search_capital"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,6 +120,19 @@
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_wind_speed" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="100dp"
+        android:theme="@style/CircularProgress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcViewWeather"

@@ -8,6 +8,7 @@ import okhttp3.Request
 class WeatherRepository {
 
     private val okHttpClient = OkHttpClient.Builder().build()
+
     private val gson = Gson()
 
     fun getWeather(longitude: Float, latitude: Float): WeatherDTO {
@@ -22,6 +23,6 @@ class WeatherRepository {
                 ).execute()
         val jsonString = responseWeather.body()?.string().orEmpty()
 
-        return gson.fromJson(jsonString, WeatherDTO::class.java)
+        return gson.fromJson(jsonString, WeatherDTO::class.java) ///
     }
 }

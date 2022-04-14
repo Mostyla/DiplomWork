@@ -7,8 +7,8 @@
 
     <Button
         android:id="@+id/btn_close"
-        android:layout_width="56dp"
-        android:layout_height="61dp"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/icon_back"
         app:layout_constraintStart_toStartOf="parent"
@@ -16,13 +16,13 @@
 
     <EditText
         android:id="@+id/et_city"
-        android:layout_width="336dp"
+        android:layout_width="335dp"
         android:layout_height="55dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/edit_text_style"
         android:ems="10"
         android:gravity="center"
-        android:hint="Enter the capital name"
+        android:hint="@string/enter_the_capital_name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

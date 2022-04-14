@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.myweatherprogramm.R
-import com.example.myweatherprogramm.model.Daily
 import com.example.myweatherprogramm.databinding.WeatherListItemBinding
+import com.example.myweatherprogramm.model.Daily
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,7 +19,17 @@ class WeatherRcViewAdapter(
         private val binding = WeatherListItemBinding.bind(item)
 
         fun bind(daily: Daily) = with(binding) {
-            Glide.with(itemView.context).load("http://openweathermap.org/img/wn/${daily.weather[0].icon}@2x.png").into(binding.daysIconsImageView)
+
+            when (daily.weather[0].main) {
+                "Clear" -> binding.daysIconsImageView.setImageResource(R.drawable.ic_clear_day)
+                "Clouds" -> binding.daysIconsImageView.setImageResource(R.drawable.ic_cloudy_weather)
+                "Mist" -> binding.daysIconsImageView.setImageResource(R.drawable.ic_mist)
+                "Snow" -> binding.daysIconsImageView.setImageResource(R.drawable.ic_snow_weather)
+                "Rain" -> binding.daysIconsImageView.setImageResource(R.drawable.ic_rainy_weather)
+                "Thunderstorm" -> binding.daysIconsImageView.setImageResource(R.drawable.ic_storm_weather)
+                "Drizzle" -> binding.daysIconsImageView.setImageResource(R.drawable.ic_shower_rain)
+            }
+
             tempDaysTextView.text = daily.temp.day.toInt().toString() + "°C"
             daysOfWeekTextView.text = convertLongToTime(daily.dt * 1000)
         }
@@ -46,4 +55,5 @@ class WeatherRcViewAdapter(
         val format = SimpleDateFormat("E", Locale.ENGLISH)
         return format.format(date)
     }
+
 }

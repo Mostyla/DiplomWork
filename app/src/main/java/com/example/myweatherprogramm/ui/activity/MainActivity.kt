@@ -159,11 +159,7 @@ class MainActivity : BaseActivity() {
         binding.tvHumidity.text = "$humidity %"
         binding.tvCurrentDate.text = currentDate.toString()
 
-
         initWeatherInons(weatherDTO)
-
-//        Glide.with(this).load("http://openweathermap.org/img/wn/$iconId@2x.png")
-//            .into(binding.ivWeather)
 
         binding.rcViewWeather.layoutManager =
             LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)

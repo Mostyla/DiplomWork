@@ -26,7 +26,7 @@ object CityHelper {
             CityModel(context.getString(R.string.monaco), 7.4166700F,  43.7333300F),
             CityModel(context.getString(R.string.amsterdam), 4.8896900F,52.3740300F),
             CityModel(context.getString(R.string.zuric), 7.4474400F, 46.9480900F),
-            CityModel(context.getString(R.string.sofi),  23.3241500F, 42.6975100F),
+            CityModel(context.getString(R.string.sofia),  23.3241500F, 42.6975100F),
             CityModel(context.getString(R.string.budapest),19.0399100F, 47.4980100F),
             CityModel(context.getString(R.string.chisinau),28.8575000F, 47.0055600F),
             CityModel(context.getString(R.string.bucharest),26.1062600F ,  44.4322500F),

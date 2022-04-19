@@ -8,13 +8,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.koin.java.KoinJavaComponent.inject
 
-class WeatherViewModel : ViewModel() {
+class WeatherViewModel : ViewModel(), KoinComponent {
     val scope = CoroutineScope(Dispatchers.IO)
 
-    //// di
-    private val rep: RetrofitWeatherRepository by inject(RetrofitWeatherRepository::class.java)
+    private val rep: RetrofitWeatherRepository by inject()
     private val data: MutableLiveData<WeatherDTO> = MutableLiveData()
 
     private fun setResponse(value: WeatherDTO) {
@@ -37,7 +38,7 @@ class WeatherViewModel : ViewModel() {
 
                 }
 
-            }) // сделать di
+            })
         }
     }
 
